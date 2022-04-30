@@ -93,6 +93,33 @@ valgrind --tool=memcheck --leak-check=full --log-file="metoda.memory" ./tema2_me
   
 ## Descriere Valgrind Cache Output
 
+1. *I refs - Cache accesses for instruction fetches*
+2. *D refs - Cache accesses for data follow*
+3. *Branches - Number of executed conditional branches*
+
+4. neopt.cache
+  ```
+  I   refs:      3,631,167,606
+  D   refs:      1,944,509,417  (1,812,164,779 rd   + 132,344,638 wr)
+  Branches:        132,394,842  (  132,154,146 cond +     240,696 ind)
+  ```
+5. opt_m.cache
+  ```
+    I   refs:      2,857,594,952
+    D   refs:      1,172,202,939  (1,040,818,181 rd   + 131,384,758 wr)
+    Branches:        132,395,019  (  132,154,311 cond +     240,708 ind)
+  ```
+6. blas.cache
+  ```
+  I   refs:      310,694,858
+  D   refs:      115,748,787  (109,271,783 rd   + 6,477,004 wr)
+  Branches:        4,897,471  (  4,639,833 cond +   257,638 ind)
+  ```
+  
+  Se poate observa ca in cazul metodei *neopt* cele mai mari numere pentru *I refs*, *D refs*, si *Branches*. *I refs* ne arata ca in cazul *neopt* se excuta cele mai multe instructiuni, *D refs* ne arata ca se acceseaza cel mai des memoria pentru a lua/salva datele, iar *Branches* ne arata cate loop-uri de executa. Putem observa ca numarul de loop-uri din metoda *opt_m* este putin mai mare decat mare decat cel din *neopt*.
+  Totusi observam ca datorita optimizarilor numarul de instructiuni executate este mai mic, dar si numarul de accesare/salvare a datelor este semnificativ mai mic.
+  In concluzie, avand in vedere datele pentru fiecare metoda, putem spune ca metoda *BLAS* este cea mai buna si din punct de vedere a instructiunilor executate, a accesului de memorie, dar si numarul foarte mic de loop-uri ce se vede in valurea *Branches*.
+
 ## Descriere Grafic
   Pentru efectuarea graficului de comparare a performantei am rulat pentru fiecare *N* (400, 600, 800, 1000, 1200) fiecare metoda de 5 ori pentru a obtine o medie a timpului de rulare.
   
