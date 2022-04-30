@@ -5,7 +5,7 @@
 #include "utils.h"
 
 /*
- * Add your unoptimized implementation here
+ * Add your optimized implementation here
  */
 
 double* my_solver(int N, double *A, double *B) {
